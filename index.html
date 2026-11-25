@@ -16,77 +16,29 @@ main{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:co
 .kicker{font:500 10px Manrope,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#668ba4;margin-bottom:8px}
 h1{font:400 clamp(48px,10vw,70px)/.95 'Bad Script',cursive;margin:0 0 5px;color:#416783;text-shadow:0 2px 15px #fff9}
 .subtitle{font:400 15px 'Cormorant Garamond',serif;color:#54758b;margin:0 0 27px;letter-spacing:.04em}
-.scene{width:min(350px,88vw);height:260px;position:relative;perspective:1000px;margin:0 auto 16px;cursor:pointer;outline:none;filter:drop-shadow(0 17px 22px #577b9630);transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
-.scene.open{transform:translateY(8px)}
-.shadow{position:absolute;left:8%;right:8%;bottom:8px;height:27px;background:#527b9a44;filter:blur(17px);border-radius:50%;transition:transform 1.2s cubic-bezier(.22,1,.36,1),opacity 1.2s}
-.scene.open .shadow{transform:scale(.92);opacity:.7}
-.envelope{position:absolute;inset:35px 10px 28px;transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.22,1,.36,1)}
+.scene{width:min(350px,88vw);height:260px;position:relative;perspective:1000px;margin:0 auto 16px;cursor:pointer;outline:none;filter:drop-shadow(0 17px 22px #577b9630)}
+.shadow{position:absolute;left:8%;right:8%;bottom:8px;height:27px;background:#527b9a44;filter:blur(17px);border-radius:50%}
+.envelope{position:absolute;inset:35px 10px 28px;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.75,.2,1)}
 .back{position:absolute;inset:0;background:linear-gradient(145deg,#c8ddec,#8fb6d5);border-radius:9px;box-shadow:0 12px 30px #547b9829}
-.letter{position:absolute;left:8%;width:84%;height:190px;bottom:8px;background:linear-gradient(145deg,#fffefa,#f5f9fc);border:1px solid #d9e7ef;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:18px;transition:transform 1.3s .35s cubic-bezier(.22,1,.36,1),opacity 1s .35s ease,box-shadow 1.2s .35s;z-index:2;box-shadow:0 5px 18px #55758b24}
+.letter{position:absolute;left:8%;width:84%;height:190px;bottom:8px;background:linear-gradient(145deg,#fffefa,#f5f9fc);border:1px solid #d9e7ef;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:18px;transition:transform 1s .25s cubic-bezier(.2,.8,.2,1);z-index:2;box-shadow:0 5px 18px #55758b24}
 .letter .tiny{font:500 9px Manrope,sans-serif;letter-spacing:.23em;text-transform:uppercase;color:#91aebe}
 .letter .script{font:400 39px 'Bad Script',cursive;color:#6389a5;margin-top:3px}
 .front{position:absolute;inset:0;background:linear-gradient(155deg,#b7d2e5,#83acd0);clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);border-radius:0 0 9px 9px;z-index:3}
-.flap{position:absolute;inset:0;background:linear-gradient(155deg,#d8e9f4,#a9c9df);clip-path:polygon(0 0,100% 0,50% 58%);transform-origin:top;transition:transform 1.05s cubic-bezier(.22,1,.36,1),z-index 0s .45s;z-index:4;filter:drop-shadow(0 3px 2px #698ba522)}
-.seal{position:absolute;z-index:5;left:50%;top:49%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:linear-gradient(145deg,#fafdff,#dcebf4);box-shadow:0 3px 9px #668ba344,inset 0 0 0 1px #fff;display:grid;place-items:center;color:#7199b5;font-size:21px;transition:opacity .45s ease,transform .55s cubic-bezier(.22,1,.36,1)}
+.flap{position:absolute;inset:0;background:linear-gradient(155deg,#d8e9f4,#a9c9df);clip-path:polygon(0 0,100% 0,50% 58%);transform-origin:top;transition:transform .85s cubic-bezier(.2,.75,.2,1);z-index:4;filter:drop-shadow(0 3px 2px #698ba522)}
+.seal{position:absolute;z-index:5;left:50%;top:49%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:linear-gradient(145deg,#fafdff,#dcebf4);box-shadow:0 3px 9px #668ba344,inset 0 0 0 1px #fff;display:grid;place-items:center;color:#7199b5;font-size:21px;transition:opacity .3s,transform .3s}
 .scene.open .flap{transform:rotateX(180deg);z-index:1}
-.scene.open .letter{transform:translateY(-116px) scale(1.02);box-shadow:0 14px 30px #55758b33}
-.scene.open .seal{opacity:0;transform:translate(-50%,-50%) scale(.5)}
-
-.hint{font:400 15px 'Cormorant Garamond',serif;color:#55778e;margin:0 0 22px;text-shadow:0 1px 8px #fff;transition:opacity .5s ease,transform .5s ease}
-.hint.fade{opacity:0;transform:translateY(-4px)}
-
-/* Плавное, бесшовное раскрытие письма через CSS Grid */
-.message-wrap{
-  width:min(590px,100%);
-  display:grid;
-  grid-template-rows:0fr;
-  opacity:0;
-  transform:translateY(28px) scale(.97);
-  filter:blur(6px);
-  transition:
-    grid-template-rows 1.35s .45s cubic-bezier(.22,1,.36,1),
-    opacity 1.2s .55s ease,
-    transform 1.35s .45s cubic-bezier(.22,1,.36,1),
-    filter 1.1s .55s ease;
-  margin:0 auto;
-}
-.message-wrap.show{
-  grid-template-rows:1fr;
-  opacity:1;
-  transform:translateY(0) scale(1);
-  filter:blur(0);
-}
-.message-inner{overflow:hidden;padding:4px 2px 14px}
-.message{
-  background:linear-gradient(165deg,#fffffffa,#f6fbffef);
-  border:1px solid #ffffffeb;
-  border-radius:20px;
-  padding:clamp(24px,5vw,42px);
-  box-shadow:0 18px 55px #557b9624,inset 0 1px 0 #fff;
-  text-align:left;
-  backdrop-filter:blur(10px);
-}
-.message > *{
-  opacity:0;
-  transform:translateY(14px);
-  transition:opacity .9s ease,transform .9s cubic-bezier(.22,1,.36,1);
-}
-.message-wrap.show .message > *{opacity:1;transform:translateY(0)}
-.message-wrap.show .message > *:nth-child(1){transition-delay:.7s}
-.message-wrap.show .message > *:nth-child(2){transition-delay:.82s}
-.message-wrap.show .message > *:nth-child(3){transition-delay:.94s}
-.message-wrap.show .message > *:nth-child(4){transition-delay:1.06s}
-.message-wrap.show .message > *:nth-child(5){transition-delay:1.18s}
-.message-wrap.show .message > *:nth-child(6){transition-delay:1.3s}
-.message-wrap.show .message > *:nth-child(7){transition-delay:1.42s}
-
+.scene.open .letter{transform:translateY(-112px);transition-delay:.25s}
+.scene.open .seal{opacity:0;transform:translate(-50%,-50%) scale(.6)}
+.hint{font:400 15px 'Cormorant Garamond',serif;color:#55778e;margin:0 0 22px;text-shadow:0 1px 8px #fff}
+.message{width:min(590px,100%);background:#fbfdfff0;border:1px solid #ffffffd9;border-radius:20px;padding:clamp(23px,5vw,40px);box-shadow:0 18px 55px #557b962b;text-align:left;opacity:0;transform:translateY(20px);max-height:0;overflow:hidden;transition:opacity .8s .35s,transform .8s .35s,max-height 1s;margin:0 auto;backdrop-filter:blur(8px)}
+.message.show{opacity:1;transform:translateY(0);max-height:1100px}
 .message .date{font:500 9px Manrope,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#8ca9bc;text-align:center;margin-bottom:13px}
 .message h2{font:400 43px 'Bad Script',cursive;text-align:center;color:#527b98;margin:0 0 14px}
 .message p{font:400 21px/1.48 'Cormorant Garamond',serif;color:#4d687b;margin:0 0 12px}
 .sign{font:400 31px 'Bad Script',cursive;text-align:right;color:#7197b1;margin-top:13px}
-.controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
-button{border:1px solid #a9c5d9;background:#f7fbfbd9;color:#52758e;padding:11px 20px;border-radius:30px;font:500 11px Manrope,sans-serif;letter-spacing:.04em;cursor:pointer;transition:all .35s cubic-bezier(.22,1,.36,1);backdrop-filter:blur(5px)}
-button:hover{background:#fff;transform:translateY(-2px);box-shadow:0 6px 16px #557b9622}
+.controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:17px}
+button{border:1px solid #a9c5d9;background:#f7fbfbd9;color:#52758e;padding:11px 20px;border-radius:30px;font:500 11px Manrope,sans-serif;letter-spacing:.04em;cursor:pointer;transition:.2s;backdrop-filter:blur(5px)}
+button:hover{background:#fff;transform:translateY(-2px)}
 .footer{margin-top:24px;font:500 9px Manrope,sans-serif;letter-spacing:.17em;color:#68869b;text-shadow:0 1px 8px #fff}
 .sparkle{position:fixed;z-index:0;pointer-events:none;color:#fff;font-size:16px;animation:float 6s linear infinite;opacity:.8;text-shadow:0 1px 8px #7ea4bd}
 @keyframes float{0%{transform:translateY(20px) rotate(0);opacity:0}15%{opacity:.8}100%{transform:translateY(-110vh) rotate(220deg);opacity:0}}
@@ -107,86 +59,25 @@ button:hover{background:#fff;transform:translateY(-2px);box-shadow:0 6px 16px #5
     </div>
   </div>
   <p class="hint" id="hint">Нажми на конверт, чтобы открыть письмо</p>
-  <div class="message-wrap" id="messageWrap">
-    <div class="message-inner">
-      <article class="message" id="message" aria-live="polite">
-        <div class="date">сегодня — твой особенный день</div>
-        <h2>С днём рождения! ♡</h2>
-        <p>Привет, систруня!</p>
-        <p>Я не смогла встретить тебя и лично поздравить, поэтому оставляю тебе такой маленький подарочек. Надеюсь, тебе будет приятно его получить.</p>
-        <p>С днём рождения, дорогая! 💋💋💋❤️ Желаю тебе счастья, чтобы все проблемы решались легко, а недоразумения и непонимания обходили тебя стороной. Успехов во всех твоих начинаниях и крепкого здоровья всегда! ❤️</p>
-        <p>Ты — мой самый лучший лучик ☀️ Надеюсь, тебе всё понравится. Спасибо, что ты есть!</p>
-        <div class="sign">Обнимаю крепко 💙</div>
-      </article>
-    </div>
-  </div>
+  <article class="message" id="message" aria-live="polite">
+    <div class="date">сегодня — твой особенный день</div>
+    <h2>С днём рождения! ♡</h2>
+    <p>Привет, систруня!</p>
+    <p>Я не смогла встретить тебя и лично поздравить, поэтому оставляю тебе такой маленький подарочек. Надеюсь, тебе будет приятно его получить.</p>
+    <p>С днём рождения, дорогая! 💋💋💋❤️ Желаю тебе счастья, чтобы все проблемы решались легко, а недоразумения и непонимания обходили тебя стороной. Успехов во всех твоих начинаниях и крепкого здоровья всегда! ❤️</p>
+    <p>Ты - мой самый лучший лучик ☀️ Надеюсь, тебе всё понравится. Спасибо, что ты есть!</p>
+    <div class="sign">Обнимаю крепко 💙</div>
+  </article>
   <div class="controls"><button id="openBtn" type="button">Открыть письмо</button><button id="againBtn" type="button">Закрыть конверт</button></div>
   <div class="footer">СДЕЛАНО С ТЕПЛОМ · ДЛЯ ОСОБЕННОГО ЧЕЛОВЕКА</div>
 </main>
 <script>
-const scene=document.getElementById('scene'),
-      messageWrap=document.getElementById('messageWrap'),
-      message=document.getElementById('message'),
-      hint=document.getElementById('hint');
-
-function setHint(text){
-  if(hint.textContent===text)return;
-  hint.classList.add('fade');
-  setTimeout(()=>{
-    hint.textContent=text;
-    hint.classList.remove('fade');
-  },350);
-}
-
-function smoothScrollTo(targetY,duration=1100){
-  const startY=window.scrollY;
-  const diff=targetY-startY;
-  let startTime=null;
-  function step(time){
-    if(!startTime)startTime=time;
-    const progress=Math.min((time-startTime)/duration,1);
-    const ease=progress<.5?4*progress*progress*progress:1-Math.pow(-2*progress+2,3)/2;
-    window.scrollTo(0,startY+diff*ease);
-    if(progress<1)requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-
-function openLetter(){
-  if(scene.classList.contains('open'))return;
-  scene.classList.add('open');
-  messageWrap.classList.add('show');
-  setHint('Для тебя — от всего сердца ♡');
-  setTimeout(()=>{
-    const rect=message.getBoundingClientRect();
-    const targetY=window.scrollY+rect.top-Math.max(24,(window.innerHeight-rect.height)/2);
-    if(targetY>window.scrollY)smoothScrollTo(targetY,1200);
-  },650);
-}
-
-function closeLetter(){
-  if(!scene.classList.contains('open'))return;
-  messageWrap.classList.remove('show');
-  setHint('Нажми на конверт, чтобы открыть письмо');
-  setTimeout(()=>scene.classList.remove('open'),350);
-  smoothScrollTo(0,1000);
-}
-
-scene.addEventListener('click',openLetter);
-scene.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLetter()}});
-document.getElementById('openBtn').addEventListener('click',openLetter);
-document.getElementById('againBtn').addEventListener('click',closeLetter);
-
-for(let i=0;i<14;i++){
-  const s=document.createElement('span');
-  s.className='sparkle';
-  s.textContent=['✧','♡','·'][i%3];
-  s.style.left=(Math.random()*100)+'%';
-  s.style.bottom=(-Math.random()*30)+'px';
-  s.style.animationDelay=(Math.random()*6)+'s';
-  s.style.animationDuration=(5+Math.random()*5)+'s';
-  document.body.appendChild(s);
-}
+const scene=document.getElementById('scene'),message=document.getElementById('message'),hint=document.getElementById('hint');
+function openLetter(){scene.classList.add('open');message.classList.add('show');hint.textContent='Для тебя — от всего сердца ♡';setTimeout(()=>message.scrollIntoView({behavior:'smooth',block:'nearest'}),450)}
+function closeLetter(){scene.classList.remove('open');message.classList.remove('show');hint.textContent='Нажми на конверт, чтобы открыть письмо';window.scrollTo({top:0,behavior:'smooth'})}
+scene.addEventListener('click',openLetter);scene.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLetter()}});
+document.getElementById('openBtn').addEventListener('click',openLetter);document.getElementById('againBtn').addEventListener('click',closeLetter);
+for(let i=0;i<14;i++){const s=document.createElement('span');s.className='sparkle';s.textContent=['✧','♡','·'][i%3];s.style.left=(Math.random()*100)+'%';s.style.bottom=(-Math.random()*30)+'px';s.style.animationDelay=(Math.random()*6)+'s';s.style.animationDuration=(5+Math.random()*5)+'s';document.body.appendChild(s)}
 </script>
 </body>
 </html>
