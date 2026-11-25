@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#dceaf4">
+<title>Маленький подарочек для тебя 💙</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@300;400;500;600&display=swap');
+:root{--ink:#425b6d;--deep:#58758b;--blue:#a9c9df;--paper:#fffefa}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:'Cormorant Garamond',Georgia,serif;background:#e6f0f7 url('watercolor-blue.jpg') center center/cover fixed no-repeat;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;background:linear-gradient(180deg,#f7fbfd38,#dcebf333);pointer-events:none}
+main{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:38px 18px 30px;text-align:center}
+.kicker{font:500 10px Manrope,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#668ba4;margin-bottom:8px}
+h1{font:400 clamp(48px,10vw,70px)/.95 'Bad Script',cursive;margin:0 0 5px;color:#416783;text-shadow:0 2px 15px #fff9}
+.subtitle{font:400 15px 'Cormorant Garamond',serif;color:#54758b;margin:0 0 27px;letter-spacing:.04em}
+.scene{width:min(350px,88vw);height:260px;position:relative;perspective:1000px;margin:0 auto 16px;cursor:pointer;outline:none;filter:drop-shadow(0 17px 22px #577b9630)}
+.shadow{position:absolute;left:8%;right:8%;bottom:8px;height:27px;background:#527b9a44;filter:blur(17px);border-radius:50%}
+.envelope{position:absolute;inset:35px 10px 28px;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.75,.2,1)}
+.back{position:absolute;inset:0;background:linear-gradient(145deg,#c8ddec,#8fb6d5);border-radius:9px;box-shadow:0 12px 30px #547b9829}
+.letter{position:absolute;left:8%;width:84%;height:190px;bottom:8px;background:linear-gradient(145deg,#fffefa,#f5f9fc);border:1px solid #d9e7ef;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:18px;transition:transform 1s .25s cubic-bezier(.2,.8,.2,1);z-index:2;box-shadow:0 5px 18px #55758b24}
+.letter .tiny{font:500 9px Manrope,sans-serif;letter-spacing:.23em;text-transform:uppercase;color:#91aebe}
+.letter .script{font:400 39px 'Bad Script',cursive;color:#6389a5;margin-top:3px}
+.front{position:absolute;inset:0;background:linear-gradient(155deg,#b7d2e5,#83acd0);clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);border-radius:0 0 9px 9px;z-index:3}
+.flap{position:absolute;inset:0;background:linear-gradient(155deg,#d8e9f4,#a9c9df);clip-path:polygon(0 0,100% 0,50% 58%);transform-origin:top;transition:transform .85s cubic-bezier(.2,.75,.2,1);z-index:4;filter:drop-shadow(0 3px 2px #698ba522)}
+.seal{position:absolute;z-index:5;left:50%;top:49%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:linear-gradient(145deg,#fafdff,#dcebf4);box-shadow:0 3px 9px #668ba344,inset 0 0 0 1px #fff;display:grid;place-items:center;color:#7199b5;font-size:21px;transition:opacity .3s,transform .3s}
+.scene.open .flap{transform:rotateX(180deg);z-index:1}
+.scene.open .letter{transform:translateY(-112px);transition-delay:.25s}
+.scene.open .seal{opacity:0;transform:translate(-50%,-50%) scale(.6)}
+.hint{font:400 15px 'Cormorant Garamond',serif;color:#55778e;margin:0 0 22px;text-shadow:0 1px 8px #fff}
+.message{width:min(590px,100%);background:#fbfdfff0;border:1px solid #ffffffd9;border-radius:20px;padding:clamp(23px,5vw,40px);box-shadow:0 18px 55px #557b962b;text-align:left;opacity:0;transform:translateY(20px);max-height:0;overflow:hidden;transition:opacity .8s .35s,transform .8s .35s,max-height 1s;margin:0 auto;backdrop-filter:blur(8px)}
+.message.show{opacity:1;transform:translateY(0);max-height:1100px}
+.message .date{font:500 9px Manrope,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#8ca9bc;text-align:center;margin-bottom:13px}
+.message h2{font:400 43px 'Bad Script',cursive;text-align:center;color:#527b98;margin:0 0 14px}
+.message p{font:400 21px/1.48 'Cormorant Garamond',serif;color:#4d687b;margin:0 0 12px}
+.sign{font:400 31px 'Bad Script',cursive;text-align:right;color:#7197b1;margin-top:13px}
+.controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:17px}
+button{border:1px solid #a9c5d9;background:#f7fbfbd9;color:#52758e;padding:11px 20px;border-radius:30px;font:500 11px Manrope,sans-serif;letter-spacing:.04em;cursor:pointer;transition:.2s;backdrop-filter:blur(5px)}
+button:hover{background:#fff;transform:translateY(-2px)}
+.footer{margin-top:24px;font:500 9px Manrope,sans-serif;letter-spacing:.17em;color:#68869b;text-shadow:0 1px 8px #fff}
+.sparkle{position:fixed;z-index:0;pointer-events:none;color:#fff;font-size:16px;animation:float 6s linear infinite;opacity:.8;text-shadow:0 1px 8px #7ea4bd}
+@keyframes float{0%{transform:translateY(20px) rotate(0);opacity:0}15%{opacity:.8}100%{transform:translateY(-110vh) rotate(220deg);opacity:0}}
+@media(max-width:420px){main{padding-top:32px}.scene{height:235px}.message p{font-size:20px}.message h2{font-size:40px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <div class="kicker">a little birthday surprise</div>
+  <h1>Для тебя, с теплом</h1>
+  <p class="subtitle">Небольшое письмо и частичка моей любви ♡</p>
+  <div class="scene" id="scene" role="button" tabindex="0" aria-label="Открыть поздравительное письмо">
+    <div class="shadow"></div><div class="envelope">
+      <div class="back"></div>
+      <div class="letter"><div class="tiny">с любовью</div><div class="script">Открой меня</div><div style="font-size:20px;margin-top:2px;color:#9bb4c5">♡</div></div>
+      <div class="front"></div><div class="flap"></div><div class="seal">♡</div>
+    </div>
+  </div>
+  <p class="hint" id="hint">Нажми на конверт, чтобы открыть письмо</p>
+  <article class="message" id="message" aria-live="polite">
+    <div class="date">сегодня — твой особенный день</div>
+    <h2>С днём рождения! ♡</h2>
+    <p>Привет, систруня!</p>
+    <p>Я не смогла встретить тебя и лично поздравить, поэтому оставляю тебе такой маленький подарочек. Надеюсь, тебе будет приятно его получить.</p>
+    <p>С днём рождения, дорогая! 💋💋💋❤️ Желаю тебе счастья, чтобы все проблемы решались легко, а недоразумения и непонимания обходили тебя стороной. Успехов во всех твоих начинаниях и крепкого здоровья всегда! ❤️</p>
+    <p>Я — твой самый лучший лучик ☀️ Надеюсь, тебе всё понравится. Спасибо, что ты есть!</p>
+    <div class="sign">Обнимаю крепко 💙</div>
+  </article>
+  <div class="controls"><button id="openBtn" type="button">Открыть письмо</button><button id="againBtn" type="button">Закрыть конверт</button></div>
+  <div class="footer">СДЕЛАНО С ТЕПЛОМ · ДЛЯ ОСОБЕННОГО ЧЕЛОВЕКА</div>
+</main>
+<script>
+const scene=document.getElementById('scene'),message=document.getElementById('message'),hint=document.getElementById('hint');
+function openLetter(){scene.classList.add('open');message.classList.add('show');hint.textContent='Для тебя — от всего сердца ♡';setTimeout(()=>message.scrollIntoView({behavior:'smooth',block:'nearest'}),450)}
+function closeLetter(){scene.classList.remove('open');message.classList.remove('show');hint.textContent='Нажми на конверт, чтобы открыть письмо';window.scrollTo({top:0,behavior:'smooth'})}
+scene.addEventListener('click',openLetter);scene.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLetter()}});
+document.getElementById('openBtn').addEventListener('click',openLetter);document.getElementById('againBtn').addEventListener('click',closeLetter);
+for(let i=0;i<14;i++){const s=document.createElement('span');s.className='sparkle';s.textContent=['✧','♡','·'][i%3];s.style.left=(Math.random()*100)+'%';s.style.bottom=(-Math.random()*30)+'px';s.style.animationDelay=(Math.random()*6)+'s';s.style.animationDuration=(5+Math.random()*5)+'s';document.body.appendChild(s)}
+</script>
+</body>
+</html>
